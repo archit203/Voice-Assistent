@@ -1,0 +1,10 @@
+Django>=4.0
+djangorestframework
+speechrecognition
+gtts
+pydub
+requests
+google-genai
+python-dotenv
+markdown
+beautifulsoup4
