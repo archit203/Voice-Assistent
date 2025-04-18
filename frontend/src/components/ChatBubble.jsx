@@ -1,6 +1,6 @@
 import React from "react";
 
-function ChatBubble({ sender, content, timestamp, type, audioURL }) {
+function ChatBubble({ sender, content, timestamp, type, audioURL, audioRef }) {
   const isUser = sender === "user";
 
   return (
@@ -8,7 +8,7 @@ function ChatBubble({ sender, content, timestamp, type, audioURL }) {
       <div className={`max-w-sm rounded-lg p-3 shadow ${isUser ? "bg-black text-white rounded-tr-none" : "bg-gray-200 text-black rounded-tl-none"}`}>
         <p className="text-sm">{content}</p>
         {type === "audio" && (
-          <audio controls className="mt-2 w-full">
+          <audio controls autoPlay className="mt-2 w-full" ref={sender === "assistant" ? audioRef : null}>
             <source src={audioURL} type="audio/mpeg" />
             Your browser does not support audio playback.
           </audio>

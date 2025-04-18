@@ -6,6 +6,7 @@ function App() {
   const [messages, setMessages] = useState([]);
   const [isProcessing, setIsProcessing] = useState(false);
   const messagesEndRef = useRef(null);
+  const audioRef = useRef(null);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -43,7 +44,7 @@ function App() {
       {/* Scrollable Chat Section */}
       <div className="flex-1 mt-16 mb-24 overflow-y-auto p-4 space-y-4 bg-gray-50">
         {messages.map((msg) => (
-          <ChatBubble key={msg.id} {...msg} />
+          <ChatBubble key={msg.id} {...msg} audioRef={audioRef}/>
         ))}
         {isProcessing && (
           <div className="text-sm text-gray-500 animate-pulse flex items-center justify-center w-full">
@@ -56,7 +57,7 @@ function App() {
 
       {/* Fixed Footer */}
       <footer className="p-4 border-t bg-slate-200 fixed bottom-0 w-full z-10">
-        <VoiceRecorder onResponse={handleResponse} setIsProcessing={setIsProcessing} />
+        <VoiceRecorder onResponse={handleResponse} setIsProcessing={setIsProcessing} audioRef={audioRef} />
       </footer>
     </div>
   );

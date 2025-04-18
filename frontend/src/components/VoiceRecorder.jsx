@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import axios from "axios";
 
-function VoiceRecorder({ onResponse, setIsProcessing }) {
+function VoiceRecorder({ onResponse, setIsProcessing, audioRef }) {
   const mediaRecorderRef = useRef(null);
   const audioChunksRef = useRef([]);
   const streamRef = useRef(null);
@@ -9,6 +9,11 @@ function VoiceRecorder({ onResponse, setIsProcessing }) {
 
   const startRecording = async () => {
     try {
+
+      if(audioRef.current && !audioRef.current.paused){
+        audioRef.current.pause();
+        audioRef.current.currentTime = 0;
+      }
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
       streamRef.current = stream;
 
